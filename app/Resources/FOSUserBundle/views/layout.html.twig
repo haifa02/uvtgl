@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Head -->
+<head>
+
+    <title>UVT</title>
+
+  
+
+<!-- Meta-Tags -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- //Meta-Tags -->
+
+<link href="{{asset('bundles/app/css/pop-box.css')}}" rel="stylesheet" type="text/css" media="all" />
+
+<!-- Style --> <link rel="stylesheet" href="{{asset('bundles/app/css/login_style.css')}}" type="text/css" media="all">
+
+<!-- Fonts -->
+<style>
+    #oublie{color:#222!important;}
+    a{cursor:pointer;}
+    #alert-oublie,#alert-pass,#alert-all,#alert-comb{display:none;}
+    .text-danger{color:red}
+    h2{color:#6dbd16;font-family: 'Indie Flower', cursive;}
+.logo{    color: #6dbd16;
+    font-size: 21px;
+    font-family: cursive;}
+</style>
+</head>
+<!-- //Head -->
+
+<!-- Body -->
+<body>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+	<div class="w3layoutscontaineragileits">
+	<h2>Authentification </h2>
+		<div>
+            {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                <!--<a href="{{ path('fos_user_security_logout') }}">
+                    {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
+                </a>-->
+            {% else %}
+                <!--<a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>-->
+            {% endif %}
+        </div>
+
+        {% for type, messages in app.session.flashBag.all %}
+            {% for message in messages %}
+                <div class="{{ type }}">
+                    {{ message|trans({}, 'FOSUserBundle') }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        <div>
+            {% block fos_user_content %}
+            {% endblock fos_user_content %}
+        </div>
+		
+	</div>
+	
+	
+	<div class="w3footeragile">
+		<p> &copy; 2018 </p>
+	</div>
+
+	
+</body>
+<!-- //Body -->
+
+</html>
